@@ -34,7 +34,8 @@ class Studioforty9_Ngrok_Model_Store extends Mage_Core_Model_Store
 
         if (false !== strpos($_SERVER['HTTP_HOST'], 'ngrok.io')) {
             $host = parse_url($url, PHP_URL_HOST);
-            $url = str_replace($host, $_SERVER['HTTP_HOST'], $url);
+            $scheme = parse_url($url, PHP_URL_SCHEME);
+            $url = str_replace($scheme . '://' . $host, 'https://' . $_SERVER['HTTP_HOST'], $url);
         }
 
         return $url;
